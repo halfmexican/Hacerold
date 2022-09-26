@@ -1,0 +1,7 @@
+data/org.halfmexican.agenda.desktop.in
+data/org.halfmexican.agenda.appdata.xml.in
+data/org.halfmexican.agenda.gschema.xml
+src/window.ui
+src/main.py
+src/window.py
+
