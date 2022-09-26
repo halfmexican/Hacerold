@@ -1,0 +1,7 @@
+data/com.github.halfmexican.hacer.desktop.in
+data/com.github.halfmexican.hacer.appdata.xml.in
+data/com.github.halfmexican.hacer.gschema.xml
+src/window.ui
+src/main.py
+src/window.py
+

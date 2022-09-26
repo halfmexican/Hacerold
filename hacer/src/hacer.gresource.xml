@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/com/github/halfmexican/hacer">
+    <file>window.ui</file>
+    <file>gtk/help-overlay.ui</file>
+    <file>agendaTask.py</file>
+  </gresource>
+</gresources>
