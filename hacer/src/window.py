@@ -24,20 +24,29 @@ gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Gio, Adw, GLib
 from .agendaTask import AgendaTask
+from pathlib import Path
 
 @Gtk.Template(resource_path='/com/github/halfmexican/hacer/window.ui')
-class HacerWindow(Gtk.ApplicationWindow):
+class HacerWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'HacerWindow'
 
     list = Gtk.Template.Child("list")
     entry = Gtk.Template.Child("entry")
+    leaflet = Gtk.Template.Child("leaflet")
+    taskview = Gtk.Template.Child("TaskView")
+    listview = Gtk.Template.Child("ListView")
+    leafletBackButton = Gtk.Template.Child("LeafletBackButton")
+    leafletForwardButton = Gtk.Template.Child("LeafletForwardButton")
     taskcount = 0
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.entry.connect("activate", self.on_enter_released)
+        self.leafletBackButton.connect("clicked", self.on_leaflet_back_clicked)
+        self.leafletForwardButton.connect("clicked", self.on_leaflet_forward_clicked)
         self.load_json()
         self.set_icon_name('com.github.halfmexican.hacer')
+        self.leaflet.set_visible_child(self.taskview)
         print(self.taskcount)
 
     def on_enter_released(self, widget):
@@ -54,19 +63,35 @@ class HacerWindow(Gtk.ApplicationWindow):
         file.close()
 
     def add_agenda_item(self, title, status):
-        task = AgendaTask(title, status, (self.taskcount - 1))
+        task = AgendaTask(title, status, (self.taskcount - 1)) #sets new tasks index in the array
         self.list.append(task)
 
+    def on_leaflet_back_clicked(self, widget):
+        self.leaflet.navigate(Adw.NavigationDirection.BACK)
+
+    def on_leaflet_forward_clicked(self, widget):
+        self.leaflet.navigate(Adw.NavigationDirection.FORWARD)
 
     def load_json(self):
-        file = open(GLib.get_user_data_dir()+'/tasks.json') #directory where lists are stored
-        data = json.load(file)
-        name =''
-        index = 0
-        for i in data['tasks']:
-            self.taskcount += 1
-            self.add_agenda_item(data['tasks'][index]['taskname'], data['tasks'][index]['complete'])
-            index += 1
+        file = Path(GLib.get_user_data_dir()+'/tasks.json')
+        #if the file exists then we can read it and generate tasks from it
+        if(file.is_file()):
+            file = open(GLib.get_user_data_dir()+'/tasks.json') #directory where lists are stored
+            data = json.load(file)
+            name =''
+            index = 0
+            for i in data['tasks']:
+                self.taskcount += 1
+                self.add_agenda_item(data['tasks'][index]['taskname'], data['tasks'][index]['complete'])
+                index += 1
+        else:
+            #if the file doesn't exist then lets create new file with an empty array
+            print('nofile')
+            with open(GLib.get_user_data_dir()+'/tasks.json', 'w+') as file:
+                dictionary = {"tasks":[]}
+                json_object = json.dumps(dictionary, indent=4)
+                json.dump(dictionary, file)
+
 
 class AboutDialog(Gtk.AboutDialog):
 

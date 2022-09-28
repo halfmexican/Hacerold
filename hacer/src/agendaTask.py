@@ -32,7 +32,7 @@ class AgendaTask(Adw.ActionRow):
 
         trash = Gtk.Button()
         trash.set_valign(Gtk.Align.CENTER)
-        #trash.set_vexpand(False)
+        trash.add_css_class("destructive-action")
         trash.set_sensitive(True)
         trash.set_icon_name("user-trash-symbolic")
         trash.connect("clicked", self.on_trashed)
