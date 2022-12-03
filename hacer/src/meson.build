@@ -12,6 +12,8 @@ gnome.compile_resources('hacer',
 python = import('python')
 
 conf = configuration_data()
+
+#conf.set('PYTHON', '/home/joshunter/pypy3.9-v7.3.9-linux64/bin')
 conf.set('PYTHON', python.find_installation('python3').path())
 conf.set('VERSION', meson.project_version())
 conf.set('localedir', join_paths(get_option('prefix'), get_option('localedir')))
@@ -29,7 +31,10 @@ hacer_sources = [
   '__init__.py',
   'main.py',
   'window.py',
-  'agendaTask.py'
+  'agendaTask.py',
+  'prefWindow.py',
+  'linkedListBox.py',
+  'window.ui'
 ]
 
 install_data(hacer_sources, install_dir: moduledir)

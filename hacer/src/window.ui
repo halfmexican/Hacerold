@@ -9,16 +9,10 @@
     <property name="resizable">True</property>
     <child type="headerbar">
       <object class="AdwHeaderBar" id="header_bar">
-        <child type="start">
-          <object class="GtkMenuButton">
-            <property name="icon-name">open-menu-symbolic</property>
-            <property name="menu-model">primary_menu</property>
-          </object>
-        </child>
       </object>
     </child>
     <child>
-      <object class="AdwLeaflet" id="leaflet">
+      <object class="AdwLeaflet" id="Adw-Leaflet-leaflet">
         <property name="can-navigate-back">True</property>
         <property name="can-navigate-forward">True</property>
         <property name="hexpand">True</property>
@@ -32,12 +26,12 @@
             <child>
               <object class="AdwHeaderBar">
                 <binding name="show-end-title-buttons">
-                  <lookup name="folded">leaflet</lookup>
+                  <lookup name="folded">Adw-Leaflet-leaflet</lookup>
                 </binding>
                 <child>
                   <object class="GtkButton" id="LeafletForwardButton">
                     <binding name="visible">
-                      <lookup name="folded">leaflet</lookup>
+                      <lookup name="folded">Adw-Leaflet-leaflet</lookup>
                     </binding>
                     <property name="icon-name">go-next-symbolic</property>
                   </object>
@@ -50,7 +44,7 @@
               </object>
             </child>
             <child>
-              <object class="GtkListBox">
+              <object class="GtkListBox" id="Gtk-ListBox-Lists">
                 <property name="selection-mode">single</property>
                 <property name="hexpand">True</property>
                 <property name="margin-top">24</property>
@@ -61,12 +55,12 @@
                   <class name="boxed-list"/>
                 </style>
                 <child>
-                  <object class="AdwActionRow">
-                    <property name="title">Tasks</property>
+                  <object class="AdwActionRow" id="Adw-ActionRow-AllTasks">
+                    <property name="title">All Tasks</property>
                   </object>
                 </child>
                 <child>
-                  <object class="AdwActionRow">
+                  <object class="AdwActionRow" id="Adw-ActionRow-CompletedTasks">
                     <property name="title">Completed</property>
                   </object>
                 </child>
@@ -90,34 +84,55 @@
             <child>
               <object class="AdwHeaderBar">
                 <binding name="show-start-title-buttons">
-                  <lookup name="folded">leaflet</lookup>
+                  <lookup name="folded">Adw-Leaflet-leaflet</lookup>
                 </binding>
+                <child type="end">
+                  <object class="GtkMenuButton">
+                    <property name="icon-name">open-menu-symbolic</property>
+                    <property name="menu-model">primary_menu</property>
+                  </object>
+                </child>
                 <child>
                   <object class="GtkButton" id="LeafletBackButton">
                     <binding name="visible">
-                      <lookup name="folded">leaflet</lookup>
+                      <lookup name="folded">Adw-Leaflet-leaflet</lookup>
                     </binding>
                     <property name="icon-name">go-previous-symbolic</property>
                   </object>
                 </child>
                 <property name="title-widget">
-                  <object class="AdwWindowTitle">
-                    <property name="title">Tasks</property>
+                  <object class="AdwWindowTitle" id="TaskWindowTitle">
+                    <property name="title">Hacer</property>
                   </object>
                 </property>
               </object>
             </child>
             <child>
-              <object class="GtkListBox" id="list">
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="show-separators">True</property>
-                <child>
-            </child>
+              <object class="GtkRevealer" id='TaskLabelRevealer'>
+              <child>
+              <object class="GtkLabel" id="TaskLabel">
+                <property name="margin-top">5</property>
+                <property name='css-classes'>title-1</property>
+                <property name='label'>Tasks</property>
+                <property name="margin-start">15</property>
+                <property name='xalign'>0.00</property>
+              </object>
+              </child>
               </object>
             </child>
             <child>
-              <object class="GtkEntry" id="entry">
+              <object class="LinkedListBox" id="Gtk-ListBox-TaskList">
+                <property name="margin-bottom">0</property>
+                <property name="margin-top">10</property>
+                <property name="margin-end">10</property>
+                <property name="margin-start">10</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+                <property name="show-separators">True</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkEntry" id="Gtk-Entry-TaskEntry">
                 <property name="hexpand">True</property>
                 <property name="vexpand">False</property>
                 <property name="margin-bottom">10</property>

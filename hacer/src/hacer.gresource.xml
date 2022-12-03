@@ -2,7 +2,7 @@
 <gresources>
   <gresource prefix="/com/github/halfmexican/hacer">
     <file>window.ui</file>
+    <file>linkedListBox.ui</file>
     <file>gtk/help-overlay.ui</file>
-    <file>agendaTask.py</file>
   </gresource>
 </gresources>
